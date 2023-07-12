@@ -1,0 +1,19 @@
+## cattail-user 11 RP1A.200720.011 V12.5.6.0.RCTINXM release-keys
+- Manufacturer: xiaomi
+- Platform: mt6765
+- Codename: cattail
+- Brand: Redmi
+- Flavor: cattail-user
+- Release Version: 11
+- Kernel Version: 4.19.127
+- Id: RP1A.200720.011
+- Incremental: V12.5.6.0.RCTINXM
+- Tags: release-keys
+- CPU Abilist: armeabi-v7a,armeabi
+- A/B Device: false
+- Locale: en-GB
+- Screen Density: 440
+- Fingerprint: Redmi/cattail/cattail:11/RP1A.200720.011/V12.5.6.0.RCTINXM:user/release-keys
+- OTA version: 
+- Branch: cattail-user-11-RP1A.200720.011-V12.5.6.0.RCTINXM-release-keys
+- Repo: redmi_cattail_dump
