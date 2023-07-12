@@ -1,0 +1,36 @@
+on boot
+chown system system /sys/devices/platform/11010000.spi/spi_master/spi1/spi1.0/irq
+chown system system /sys/devices/platform/11010000.spi/spi_master/spi1/spi1.0/wakeup_enable
+chown system system /sys/devices/platform/11010000.spi/spi_master/spi1/spi1.0/modalias
+chown system system /sys/devices/platform/11010000.spi/spi_master/spi1/spi1.0/clk_enable
+chown system system /sys/devices/platform/11010000.spi/spi_master/spi1/spi1.0/authen_fd/performance
+chown system system /dev/focaltech_fp
+chmod 0660 /dev/focaltech_fp
+chmod 664 /proc/ppm/enabled
+chown system system /proc/ppm/enabled
+chmod 664 /proc/ppm/policy/ut_fix_core_num
+chown system system /proc/ppm/policy/ut_fix_core_num
+chmod 664 /proc/ppm/policy/ut_fix_freq_idx
+chown system system /proc/ppm/policy/ut_fix_freq_idx
+
+service vendor.fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service
+    # "class hal" causes a race condition on some devices due to files created
+    # in /data. As a workaround, postpone startup until later in boot once
+    # /data is mounted.
+    class late_start
+    user system
+    group system input uhid
+    # writepid /dev/cpuset/system-background/tasks
+
+service vendor.focaltech.fps_hal /vendor/bin/hw/vendor.focaltech.fingerprint@1.0-service
+    class late_start
+    user system
+    group system
+
+on post-fs-data
+	mkdir /data/vendor/focaltech 0760 system system
+	mkdir /data/vendor/fpc 0777 system system
+	restorecon /data/vendor/focaltech
+
+on property:ro.hardware.fp.restartimes=max
+    stop vendor.fps_hal
